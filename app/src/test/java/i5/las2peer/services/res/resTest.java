@@ -116,6 +116,32 @@ public class resTest {
   }
 
 
+  /**
+   * 
+   * Test for the PostDishRating_ID970340 method.
+   * 
+   */
+  @Test
+  public void testPostDishRating_ID970340() {
+    MiniClientCoverage c = new MiniClientCoverage(mainPath);
+    c.setConnectorEndpoint(connector.getHttpEndpoint());
+    
+        
+    try {
+      c.setLogin(AnonymousAgentImpl.IDENTIFIER, "");
+      ClientResponse result = c.sendRequest("GET", "/dishes/{id}/ratings", """
+""", "text/plain", "*/*", new HashMap<>(), "1");
+      System.out.println("Result of request with id: 828329: " + result.getResponse().trim());
+    
+      Assert.assertEquals("[100009]", 200, result.getHttpCode());
+
+    } catch (Exception e) {
+      e.printStackTrace();
+      fail("Exception: " + e);
+    }
+
+    
+  }
 
 
 
