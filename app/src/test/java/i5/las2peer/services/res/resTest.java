@@ -156,14 +156,17 @@ public class resTest {
     try {
       c.setLogin(AnonymousAgentImpl.IDENTIFIER, "");
       ClientResponse result = c.sendRequest("POST", "/dishes/{id}/ratings", """
-""", "text/plain", "*/*", new HashMap<>(), "1");
+{
+"stars":5,
+"comment":"nice"
+}""", "application/json", "*/*", new HashMap<>(), "1");
       System.out.println("Result of request with id: 828329: " + result.getResponse().trim());
     
       Assert.assertEquals("[100009]", 200, result.getHttpCode());
 
-      Assert.assertEquals("[732689]", 201, result.getHttpCode());
-
       Assert.assertEquals("[506495]", 404, result.getHttpCode());
+
+      Assert.assertEquals("[732689]", 201, result.getHttpCode());
 
     } catch (Exception e) {
       e.printStackTrace();
